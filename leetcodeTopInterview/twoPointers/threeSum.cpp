@@ -3,7 +3,6 @@ using namespace std;
 
 vector<vector<int>> threeSum(vector<int> &nums)
 {
-
     vector<vector<int>> res;
     sort(nums.begin(), nums.end());
 
@@ -13,7 +12,6 @@ vector<vector<int>> threeSum(vector<int> &nums)
     {
         if (i > 0 && nums[i] == nums[i - 1])
             continue;
-        ;
 
         int left = i + 1, right = n - 1;
         while (left < right)
