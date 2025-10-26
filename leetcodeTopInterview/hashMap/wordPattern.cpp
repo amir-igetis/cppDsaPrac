@@ -5,7 +5,7 @@ bool wordPattern(string pattern, string s)
 {
     unordered_map<char, string> charToWord;
     unordered_map<string, char> wordToChar;
-    
+
     istringstream iss(s);
     vector<string> words;
     string word;
@@ -48,7 +48,7 @@ int main()
 
     string pattern = "abba", s = "dog cat cat dog";
 
-    cout << wordPattern(pattern, s) << endl;
+    cout << (wordPattern(pattern, s) ? "True" : "False") << endl;
 
     return 0;
 }

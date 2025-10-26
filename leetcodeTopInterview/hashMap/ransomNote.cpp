@@ -47,7 +47,7 @@ int main()
 
     string ransomNote = "a", magazine = "b";
 
-    cout << canConstruct(ransomNote, magazine) << endl;
+    cout << (canConstruct(ransomNote, magazine) ? "True" : "False") << endl;
 
     return 0;
 }
