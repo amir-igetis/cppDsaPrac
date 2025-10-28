@@ -3,10 +3,9 @@ using namespace std;
 
 int trapRainWater(vector<vector<int>> &heightMap)
 {
-    int m = heightMap.size();
+    int m = heightMap.size(), n = heightMap[0].size();
     if (m == 0)
         return 0;
-    int n = heightMap[0].size();
     if (n == 0)
         return 0;
 

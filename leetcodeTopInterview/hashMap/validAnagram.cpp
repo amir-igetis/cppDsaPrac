@@ -1,6 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+bool isAnagramI(string s, string t)
+{
+    if (s.size() != t.size())
+        return false;
+
+    vector<int> count(26);
+    for (auto &i : s)
+        count[i - 'a']++;
+
+    for (auto &i : t)
+    {
+        count[i - 'a']--;
+        if (count[i - 'a'] < 0)
+            return false;
+    }
+
+    return true;
+}
+
 bool isAnagram(string s, string t)
 {
     if (s.size() != t.size())
@@ -31,7 +50,7 @@ int main()
 
     string s = "anagram", t = "nagram";
 
-    cout << isAnagram(s, t) << endl;
+    cout << (isAnagramI(s, t) ? "True" : "False") << endl;
 
     return 0;
 }
