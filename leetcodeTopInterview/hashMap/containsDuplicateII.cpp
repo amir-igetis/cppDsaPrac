@@ -14,11 +14,25 @@ bool containsNearbyDuplicate(vector<int> &nums, int k)
     return false;
 }
 
+bool containsNearbyDuplicateI(vector<int> &nums, int k)
+{
+    unordered_map<int, int> mp;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        if (mp.count(nums[i]) && i - mp[nums[i]] <= k)
+            return true;
+        mp[nums[i]] = i;
+    }
+
+    return false;
+}
+
 int main()
 {
 
     vector<int> nums = {1, 2, 3, 1};
     int k = 3;
-    cout << containsNearbyDuplicate(nums, k) << endl;
+    cout << (containsNearbyDuplicate(nums, k) ? "True" : "False") << endl;
+    // cout << (containsNearbyDuplicateI(nums, k) ? "True" : "False") << endl;
     return 0;
 }
