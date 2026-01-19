@@ -1,26 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int func(int n, string s)
+void func(int n)
 {
-    vector<string> res;
-
-    for (int i = 0; i < s.size(); i++)
+    for (int i = 1; i <= n; i++)
     {
-        string str = s;
-        str[i] = (str[i] == '0') ? '1' : '0';
-        res.push_back(str);
+        cout << i << " ";
     }
-
-    int count = 0;
-    for (const string &str : res)
-    {
-        for (char c : str)
-            if (c == '1')
-                count++;
-    }
-
-    return count;
+    cout << "\n";
 }
 
 int main()
@@ -34,7 +21,8 @@ int main()
     {
         int n;
         string s;
-        cin >> n >> s;
+        cin >> n;
+        func(n);
 
         // vector<int> res = func(n, s);
         // // cout << func(n, s) << endl;
@@ -44,8 +32,6 @@ int main()
         //     cout << i << " ";
         // }
         // cout << endl;
-
-        cout << func(n, s) << endl;
     }
 
     return 0;

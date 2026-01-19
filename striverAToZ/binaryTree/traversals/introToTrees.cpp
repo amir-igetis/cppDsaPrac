@@ -16,7 +16,7 @@ void printList(TreeNode *node)
     if (!node)
         return;
     printList(node->left);
-    cout << node->val;
+    cout << node->val << " ";
     printList(node->right);
 }
 
@@ -29,6 +29,7 @@ int countNodes(int i)
 void createTree(TreeNode *root, vector<int> &v)
 {
     queue<TreeNode *> q;
+    // or can use the first or 0th index elem in the array as the root
     q.push(root);
     int it = 1;
     int len = v.size();
@@ -91,7 +92,7 @@ vector<int> inorder(TreeNode *root)
     stack<TreeNode *> st;
     while (true)
     {
-        if (!root)
+        if (root)
         {
             st.push(root);
             root = root->left;
@@ -226,6 +227,7 @@ vector<vector<int>> levelorder(TreeNode *root)
         for (int i = 0; i < lvlNum; i++)
         {
             TreeNode *temp = q.front();
+            q.pop();
             if (temp->left)
                 q.push(temp->left);
             if (temp->right)
@@ -250,15 +252,65 @@ int main()
 
     cout << countNodes(5) << endl;
 
+    cout << "Preorder iterative --> " << endl;
     vector<int> ans = preorder(root);
     for (auto &i : ans)
         cout << i << " ";
     cout << endl;
 
+    cout << "Preorder recursion --> " << endl;
     vector<int> ansI = preorderI(root);
     for (auto &i : ansI)
         cout << i << " ";
     cout << endl;
+
+    cout << "Inorder iterative --> " << endl;
+    vector<int> ansII = inorder(root);
+    for (auto &i : ansII)
+        cout << i << " ";
+    cout << endl;
+
+    cout << "Inorder recursion --> " << endl;
+    vector<int> ansIII = inorderI(root);
+    for (auto &i : ansIII)
+        cout << i << " ";
+    cout << endl;
+
+    cout << "Postorder iterative using double stack --> " << endl;
+    vector<int> ansIV = postorder(root);
+    for (auto &i : ansIV)
+        cout << i << " ";
+    cout << endl;
+
+    cout << "Postorder recursion --> " << endl;
+    vector<int> ansV = postorderI(root);
+    for (auto &i : ansV)
+        cout << i << " ";
+    cout << endl;
+
+    cout << "Postorder iterative using single stack --> " << endl;
+    vector<int> ansVI = postorderII(root);
+    for (auto &i : ansVI)
+        cout << i << " ";
+    cout << endl;
+
+    // level order
+    cout << "Level order traversal is --> " << endl;
+    vector<vector<int>> ansVII = levelorder(root);
+    for (auto &i : ansVII)
+    {
+        for (auto &j : i)
+            cout << j << " ";
+        cout << endl;
+    }
+
+    // create tree;
+    TreeNode *rootI = new TreeNode(2);
+    vector<int> arrI = {2, 3, 8, 9, 4, 72, 32};
+    createTree(rootI, arrI);
+
+    cout << "Inorder of the created tree is -- >" << endl;
+    printList(rootI);
 
     return 0;
 }

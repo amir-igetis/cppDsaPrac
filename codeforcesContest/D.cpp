@@ -1,48 +1,46 @@
-#include <iostream>
-#include <unordered_map>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
-void max_beautiful_segments(int test_cases)
+vector<int> solve(vector<int> &arr, vector<vector<int>> &arr2, int h)
 {
-    while (test_cases--)
+    vector<int> array = arr;
+    vector<int> curr = arr;
+    for (auto &i : arr2)
     {
-        int n;
-        cin >> n;
-        vector<int> a(n);
-        for (int i = 0; i < n; i++)
-        {
-            cin >> a[i];
-        }
-        unordered_map<long long, int> prefix_map;
-        prefix_map[0] = -1;
-        long long prefix_sum = 0;
-        int last_cut = -1;
-        int beautiful_segments = 0;
+        int bi = i[0] - 1;
+        int ci = i[1];
 
-        for (int i = 0; i < n; i++)
-        {
-            prefix_sum += a[i];
-
-            if (prefix_map.find(prefix_sum) != prefix_map.end())
-            {
-                if (prefix_map[prefix_sum] >= last_cut)
-                {
-                    beautiful_segments++;
-                    last_cut = i;
-                }
-            }
-            prefix_map[prefix_sum] = i;
-        }
-
-        cout << beautiful_segments << endl;
+        curr[bi] = curr[bi] + ci;
+        if (curr[bi] > h)
+            curr = array;
     }
+
+    return curr;
 }
 
 int main()
 {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
     int t;
     cin >> t;
-    max_beautiful_segments(t);
+    while (t--)
+    {
+        int n, m, h;
+        cin >> n >> m >> h;
+        vector<int> arr(n);
+        vector<vector<int>> arr2(m, vector<int>(2));
+        for (int i = 0; i < n; i++)
+            cin >> arr[i];
+        for (int i = 0; i < m; i++)
+        {
+            cin >> arr2[i][0] >> arr2[i][1];
+        }
+        vector<int> res = solve(arr, arr2, h);
+        for (auto &i : res)
+            cout << i << " ";
+        cout << endl;
+    }
     return 0;
 }
