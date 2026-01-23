@@ -13,7 +13,7 @@ struct TreeNode
 
 bool getPath(TreeNode *root, vector<int> &path, int target)
 {
-    if (root == nullptr)
+    if (!root)
         return false;
 
     // add current node
@@ -36,7 +36,7 @@ bool getPath(TreeNode *root, vector<int> &path, int target)
 vector<int> solve(TreeNode *root, int target)
 {
     vector<int> path;
-    if (root == nullptr)
+    if (!root)
         return path;
 
     getPath(root, path, target);
