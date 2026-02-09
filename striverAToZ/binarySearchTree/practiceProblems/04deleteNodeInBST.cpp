@@ -93,7 +93,8 @@ int main()
     root->right = new TreeNode(15);
     root->right->right = new TreeNode(17);
 
-    TreeNode *ans = deleteNode(root, 9);
+    TreeNode *ans = deleteNode(root, 15);
+    printList(ans);
 
     return 0;
 }

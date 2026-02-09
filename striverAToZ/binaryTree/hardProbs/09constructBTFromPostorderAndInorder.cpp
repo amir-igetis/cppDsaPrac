@@ -51,6 +51,32 @@ TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder)
                  postorder, 0, postorder.size() - 1, hm);
 }
 
+// using global variable
+unordered_map<int, int> inorderMp;
+int postIdx = 0;
+TreeNode *constructTreeI(vector<int> &postorder, int left, int right)
+{
+    if (left > right)
+        return NULL;
+    int rootVal = postorder[postIdx--];
+    TreeNode *root = new TreeNode(rootVal);
+    int inIdx = inorderMp[rootVal];
+    root->right = constructTreeI(postorder, inIdx + 1, right);
+    root->left = constructTreeI(postorder, left, inIdx - 1);
+    return root;
+}
+
+TreeNode *buildTreeI(vector<int> &inorder, vector<int> &postorder)
+{
+    inorderMp.clear(); // good practice
+    for (int i = 0; i < inorder.size(); i++)
+    {
+        inorderMp[inorder[i]] = i;
+    }
+    postIdx = postorder.size() - 1;
+    return constructTreeI(postorder, 0, inorder.size() - 1);
+}
+
 // Inorder printer
 void printInorder(TreeNode *root)
 {
@@ -75,7 +101,8 @@ int main()
         cout << x << " ";
     cout << endl;
 
-    TreeNode *root = buildTree(inorder, postorder);
+    // TreeNode *root = buildTree(inorder, postorder);
+    TreeNode *root = buildTreeI(inorder, postorder);
 
     cout << "Inorder of Unique Binary Tree Created:\n";
     printInorder(root);
