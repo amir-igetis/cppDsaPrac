@@ -3,12 +3,14 @@ using namespace std;
 
 bool canJump(vector<int> &nums)
 {
-    int mnaxIdx = 0;
+    if (nums.size() < 2)
+        return true;
+    int maxIdx = 0;
     for (int i = 0; i < nums.size(); i++)
     {
-        if (i > mnaxIdx)
+        if (i > maxIdx)
             return false;
-        mnaxIdx = max(mnaxIdx, i + nums[i]);
+        maxIdx = max(maxIdx, i + nums[i]);
     }
     return true;
 }
@@ -16,6 +18,7 @@ bool canJump(vector<int> &nums)
 int main()
 {
     vector<int> nums = {4, 2, 7, 1, 2};
-    cout << (canJump(nums) ? "True" : "False") << endl;
+    vector<int> numsI = {3, 2, 1, 0, 4};
+    cout << (canJump(numsI) ? "True" : "False") << endl;
     return 0;
 }

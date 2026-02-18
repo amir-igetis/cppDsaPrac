@@ -43,6 +43,8 @@ int jumpI(vector<int> &nums)
 // optimal O(n) & sc O(1)
 int jumpII(vector<int> &nums)
 {
+    if (nums.size() < 2)
+        return 0;
     int jumps = 0, currEnd = 0, farthest = 0;
     for (int i = 0; i < nums.size() - 1; i++)
     {

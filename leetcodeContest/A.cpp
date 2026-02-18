@@ -1,43 +1,31 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int helper(int i, vector<int> &nums)
+// weighted word mapping
+string mapWordWeights(vector<string> &words, vector<int> &weights)
 {
-    int sum = 0;
-    int count = 0;
-    for (int j = i + 1; j < nums.size(); j++)
-    {
-        sum += nums[j];
-        count++;
-    }
-    return (int)sum / count;
-}
 
-int dominantIndices(vector<int> &nums)
-{
-    int n = nums.size();
-    vector<int> dominant(n);
-    int i = 0;
-    while (i < n - 1)
+    string res;
+    for (int i = 0; i < words.size(); i++)
     {
-        dominant[i] = helper(i, nums);
-        i++;
+        int wt = 0;
+        for (int j = 0; j < words[i].size(); j++)
+        {
+            wt += weights[words[i][j] - 'a'];
+        }
+        int mod = wt % 26;
+        char rev = 'z' - mod;
+        res.push_back(rev);
     }
-    int ans = 0;
-    for (int i = 0; i < n - 1; i++)
-    {
-        if (nums[i] > dominant[i])
-            ans++;
-    }
-    return ans;
+    return res;
 }
 
 int main()
 {
 
-    vector<int> nums = {
-        0};
-    cout << dominantIndices(nums) << endl;
+    vector<string> words = {"abcd", "def", "xyz"};
+    vector<int> weights = {5, 3, 12, 14, 1, 2, 3, 2, 10, 6, 6, 9, 7, 8, 7, 10, 8, 9, 6, 9, 9, 8, 3, 7, 7, 2};
+    cout << mapWordWeights(words, weights) << endl;
 
     return 0;
 }

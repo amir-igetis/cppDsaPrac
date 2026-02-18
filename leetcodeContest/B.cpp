@@ -1,69 +1,92 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<long long> mergeAdjacent(vector<int> &nums)
+struct Node
 {
-    int n = nums.size();
-    vector<long long> ans;
-    if (nums.empty())
-        return {};
-    ans[0] = nums[0];
-    int j = 0;
-    for (int i = 1; i < n; i++)
+    Node *links[26];
+    int count;
+    Node()
     {
-        if (ans[j] == nums[i])
-        {
-            ans[j] = 2 * nums[i];
-        }
-        else
-        {
-
-            ans[j + 1] = nums[i];
-            j++;
-        }
+        count = 0;
+        for (int i = 0; i < 26; i++)
+            links[i] = nullptr;
     }
-    return ans;
-}
 
-vector<long long> mergeAdjacentI(vector<int> &nums)
+    bool containsKey(char ch)
+    {
+        return links[ch - 'a'] != nullptr;
+    }
+    void put(char ch, Node *node)
+    {
+        links[ch - 'a'] = node;
+    }
+    Node *get(char ch)
+    {
+        return links[ch - 'a'];
+    }
+};
+
+class Trie
 {
-    vector<long long> ans(nums.begin(), nums.end());
-    while (true)
+public:
+    Node *root;
+    Trie()
     {
-        vector<long long> temp;
-        bool merged = false;
-        int i = 0;
-        while (i < ans.size())
-        {
-            if (i + 1 < ans.size() && ans[i] == ans[i + 1])
-            {
-                temp.push_back(ans[i] * 2);
-                i += 2;
-                merged = true;
-            }
-            else
-            {
-                temp.push_back(ans[i]);
-                i++;
-            }
-        }
-        if (!merged)
-            break;
-        ans = temp;
+        root = new Node();
     }
-    return ans;
+
+    void insertPrefix(string &word, int k)
+    {
+        Node *node = root;
+        for (int i = 0; i < k; i++)
+        {
+            if (!node->containsKey(word[i]))
+                node->put(word[i], new Node());
+
+            node = node->get(word[i]);
+        }
+        node->count++;
+    }
+
+    int countGroups(Node *node, int deep, int k)
+    {
+        if (!node)
+            return 0;
+        int group = 0;
+        if (deep == k)
+        {
+            if (node->count >= 2)
+                return 1;
+            return 0;
+        }
+
+        for (int i = 0; i < 26; i++)
+            group += countGroups(node->links[i], deep + 1, k);
+
+        return group;
+    }
+};
+
+int prefixConnected(vector<string> &words, int k)
+{
+    Trie trie;
+    for (auto &i : words)
+    {
+        if (i.size() >= k)
+            trie.insertPrefix(i, k);
+    }
+    return trie.countGroups(trie.root, 0, k);
 }
 
 int main()
 {
-    vector<int> nums = {3, 1, 1, 2};
-    vector<int> numsI = {2, 2, 4};
-    vector<int> numsII = {2, 1, 1, 2};
+    // vector<string> words = {"car", "cat", "cartoon"};
+    // int k = 3;
 
-    vector<long long> ans = mergeAdjacentI(numsII);
-    for (auto &i : ans)
-        cout << i << " ";
-    cout << endl;
+    vector<string> words = {"bat", "dog", "dog", "doggy", "bat"};
+    int k = 3;
+
+    cout << prefixConnected(words, k) << endl;
 
     return 0;
 }
