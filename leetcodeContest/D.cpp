@@ -1,12 +1,12 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-vector<bool> palindromePath(int n, vector<vector<int>>& edges, string s, vector<string>& queries) {
-        
-    }
+vector<bool> palindromePath(int n, vector<vector<int>> &edges, string s, vector<string> &queries)
+{
+}
 
-int main() {
-
+int main()
+{
 
     return 0;
 }
