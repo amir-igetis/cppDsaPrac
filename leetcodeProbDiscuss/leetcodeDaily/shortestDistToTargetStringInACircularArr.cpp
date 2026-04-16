@@ -23,6 +23,7 @@ int main()
     vector<string> words = {"hello", "i", "am", "leetcode", "hello"};
     string target = "hello";
     int startIndex = 1;
+    // cout << "This is the answer" << endl;
     cout << closestTarget(words, target, startIndex) << endl;
 
     return 0;
