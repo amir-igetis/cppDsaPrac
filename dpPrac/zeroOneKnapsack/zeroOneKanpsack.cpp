@@ -15,23 +15,35 @@ int knapsack(vector<int> &wt, vector<int> &val, int w, int n)
 }
 
 // memoization
-int knapsackI(vector<int> &wt, vector<int> &val, int w, int n)
-{
-    int t[n + 1][w + 1];
-    memset(t, -1, sizeof(t));
 
-    if (n == 0 || w == 0)
+int solve(vector<int> wt, vector<int> val, int W, int n, vector<vector<int>> t)
+{
+    if (n == 0 || W == 0)
         return 0;
 
-    if (t[n][w] != -1)
-        return t[n][w];
+    if (t[n][W] != -1)
+        return t[n][W];
 
-    if (wt[n - 1] <= w)
-        t[n][w] = max(val[n - 1] +
-                          knapsack(wt, val, w - wt[n - 1], n - 1),
-                      knapsack(wt, val, w, n - 1));
-    else if (wt[n - 1] > w)
-        return t[n][w] = knapsack(wt, val, w, n - 1);
+    if (wt[n - 1] <= W)
+    {
+        return t[n][W] = max(
+                   val[n - 1] + solve(wt, val, W - wt[n - 1], n - 1, t),
+                   solve(wt, val, W, n - 1, t));
+    }
+    else
+    {
+        return t[n][W] = solve(wt, val, W, n - 1, t);
+    }
+}
+
+int knapsackI(vector<int> &wt, vector<int> &val, int w, int n)
+{
+    // int t[n + 1][w + 1];
+    // memset(t, -1, sizeof(t));
+
+    vector<vector<int>> t(n + 1, vector<int>(w + 1, -1));
+
+    return solve(wt, val, w, n, t);
 }
 
 // top down
