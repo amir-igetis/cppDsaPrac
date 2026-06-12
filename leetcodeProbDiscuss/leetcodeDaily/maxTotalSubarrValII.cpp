@@ -124,7 +124,7 @@ public:
     }
 };
 
-long long maxTotalValue(vector<int> &nums, int k)
+long long maxTotalValueI(vector<int> &nums, int k)
 {
     int n = nums.size();
     SegTree seg(nums);
