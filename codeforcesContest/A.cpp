@@ -1,13 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void func(int n)
+void func()
 {
-    for (int i = 1; i <= n; i++)
+    long long n, k;
+    cin >> n >> k;
+    long long ans = 0;
+    long long cost = 1;
+    while (n > 0 && cost <= n)
     {
-        cout << i << " ";
+        long long take = min(k, n / cost);
+        ans += take;
+        n -= take * cost;
+        cost *= 2;
     }
-    cout << "\n";
+    cout << ans << endl;
 }
 
 int main()
@@ -19,10 +26,7 @@ int main()
     cin >> t;
     while (t--)
     {
-        int n;
-        string s;
-        cin >> n;
-        func(n);
+        func();
 
         // vector<int> res = func(n, s);
         // // cout << func(n, s) << endl;
