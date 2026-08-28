@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Dynamic Programming
+/// Time complexity: O(n).
+///
+/// Space complexity: O(n).
+///
+/// The arrays pre and f each require O(n) space.
+int stoneGameVIII(vector<int> &stones)
+{
+    int n = stones.size();
+    vector<int> pre;
+    partial_sum(stones.begin(), stones.end(), back_inserter(pre));
+    vector<int> f(n);
+    f[n - 1] = pre[n - 1];
+    for (int i = n - 2; i >= 1; --i)
+    {
+        f[i] = max(f[i + 1], pre[i] - f[i + 1]);
+    }
+    return f[1];
+}
+
+int main()
+{
+    vector<int> stones = {-1, 2, -3, 4, -5};
+    cout << stoneGameVIII(stones) << endl;
+
+    return 0;
+}
