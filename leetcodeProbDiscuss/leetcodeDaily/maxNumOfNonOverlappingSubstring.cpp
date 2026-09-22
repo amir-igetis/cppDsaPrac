@@ -81,12 +81,8 @@ vector<string> maxNumOfSubstrings(string s)
 }
 
 // greedy ChatGPT
-#include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
 
-std::vector<std::string> maxNumOfSubstringsI(const std::string &s)
+vector<string> maxNumOfSubstringsI(const std::string &s)
 {
     int n = s.length();
 
