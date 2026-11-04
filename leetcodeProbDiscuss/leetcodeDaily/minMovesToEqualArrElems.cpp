@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+/// tc O(n) sc O(1)
 static int minMoves(vector<int> &nums)
 {
     int lo = *min_element(nums.begin(), nums.end()), moves = 0;
