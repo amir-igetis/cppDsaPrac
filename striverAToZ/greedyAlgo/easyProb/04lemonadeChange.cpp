@@ -44,6 +44,13 @@ bool lemonadeChange(vector<int> &bills)
     return true;
 }
 
+/// You are selling lemonade at a stand where each glass costs exactly $5. 
+/// Customers are standing in a queue to buy from you, and order one at a time. 
+/// Each customer will only buy one lemonade and pay with either a $5, $10, or $20 bill.
+/// 
+/// You must provide the correct change to each customer so that the net transaction 
+/// is exactly $5. You start with no money in your cash register. Return true if you 
+/// can provide every customer with correct change, or false if you cannot.
 int main()
 {
 
